@@ -15,7 +15,7 @@ RUN mix archive.install --force github rrrene/bunt
 
 COPY ./entrypoint.sh /docker/entrypoint.sh
 COPY ./entrypoint.sh /docker/entrypoint.sh
-COPY .credo.exs /github/workspace/.credo.exs
+COPY .credo.exs credo.exs
 RUN chmod +x /docker/entrypoint.sh
 
 ENTRYPOINT [ "/docker/entrypoint.sh" ]
