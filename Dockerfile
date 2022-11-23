@@ -13,7 +13,7 @@ RUN mix local.hex --force
 RUN mix archive.install --force github rrrene/credo
 RUN mix archive.install --force github rrrene/bunt
 
-COPY ./entrypoint.sh /docker/entrypoint.sh
+
 COPY ./entrypoint.sh /docker/entrypoint.sh
 COPY .credo.exs credo.exs
 RUN chmod +x /docker/entrypoint.sh
